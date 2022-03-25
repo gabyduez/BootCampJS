@@ -24,11 +24,13 @@ form.addEventListener("submit",onSubmit);
  */
 function onSubmit(event)
 {event.preventDefault(); //evita que el formulario haga lo que tiene por default el navegador
+    
     const data = new FormData(form);
     const values = Array.from(data.entries()); //convierte los datos que el usuario ingreso en un array para poder manipularlos
     
     const [frmCodigo, frmNombre, frmCantidad, frmPrecio, frmCategoria]=values;
     let codigo = frmCodigo[1];
+    console.log("codigo"+codigo);
     const nombre = frmNombre[1];
     const cantidad = frmCantidad[1];
     const precio = frmPrecio[1];
@@ -43,6 +45,7 @@ function onSubmit(event)
 
     if(!codigo)
     {
+        console.log("entro: "+codigo);
         indice++;
         codigo = indice;
         tr = document.createElement("tr");
@@ -50,6 +53,7 @@ function onSubmit(event)
     }
     else
     {
+        console.log("else"+codigo);
         tr = currentRow;
     }
 
@@ -62,7 +66,15 @@ function onSubmit(event)
                 <td>${cantidad}</td>
                 <td>${precio} </td>
                 <td>${total}  </td>
-                <td><a href="#" onclick="onEdit(event)">Editar</a> | <a href="#"  onclick="onDelete(event)">Elimina</a></td>
+                <td>
+                <div class="btn-group">
+                    <a title="Editar" href="#" onclick="onEdit(event)"   class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>  
+                    <a title="Borrar" href="#" onclick="onDelete(event)" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash"></i>
+                    </a></td>
+                </div>
     `;
 
     
@@ -72,6 +84,7 @@ function onSubmit(event)
     grantotalTotalElement.innerText = granTotal;
 
     form.reset();//borra el formulario
+    inputCodigo.value='';
     form.focus(input);
    
 
@@ -87,9 +100,9 @@ function onEdit(event)
     event.preventDefault();
     //referencia del evento del elemento 
     /**@type {HTMLElement} */
-    const anchor = event.target;
+    const anchor = event.currentTarget;
     //elemento donde esta incluido el anchor
-    const tr =anchor.parentElement.parentElement
+    const tr =anchor.parentElement.parentElement.parentElement
     const celdas = tr.getElementsByTagName("td");
     const [tdCodigo, tdNombre, tdCantidad, tdPrecio] = celdas;
 
@@ -113,11 +126,12 @@ function onDelete(event)
     
     //referencia del evento del elemento 
     /**@type {HTMLElement} */
-    const anchor = event.target;
+    const anchor = event.currentTarget;
     //elemento donde esta incluido el anchor
-    const tr =anchor.parentElement.parentElement
+    const tr =anchor.parentElement.parentElement.parentElement
     tbody.removeChild(tr);
     
     
     
 }
+
