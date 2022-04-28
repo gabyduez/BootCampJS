@@ -15,8 +15,9 @@ const middlewares = applyMiddleware(
     );
 const store = createStore($store.reducer, preloadedState, middlewares);
 
+export default store;
 
-store.subscribe(dispatchOnChange(store, (state)=>{
+/*store.subscribe(dispatchOnChange(store, (state)=>{
     ui.renderForm(state.producto);
     ui.renderTable(state.productos);
 }))
@@ -38,4 +39,6 @@ function dispatchOnChange (store, dispatch){
     }
     }
 }
+*/
+
 

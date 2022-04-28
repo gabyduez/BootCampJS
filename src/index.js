@@ -1,9 +1,9 @@
 import React from "react";
-import ReactDom from "react-dom";
+import ReactDOM from "react-dom";
+import {Provider } from "react-redux";
+import App from "./app";
+import store from "./store";
 
-const container = document.getElementById("root");
-const App = () => (<div>
-    <h1>Hola React </h1>
-    </div> );
+const rootElement = document.getElementById("root");
 
-ReactDom.render(<App />,container);
+    ReactDOM.render( <Provider store={store} ><App /> </Provider>, rootElement);
